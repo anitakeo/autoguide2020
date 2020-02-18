@@ -45,6 +45,21 @@ class Auto {
 	 * @return array - Le array du modele ou false
 	 */
 
+	static public function trouverModele($autos, $nomMarque, $nomModele){
+		if(!isset($autos[nomMarque])){
+			 return false;
+		}
+	 
+	 	if(!isset($autos[$nomMarque][$nomModele])){
+		 	return false;
+	 	}
+
+		$resultat = $autos[$nomMarque][$nomModele];
+			return $resultat;
+
+	}
+
+
 
 	/** Méthode "ariane" qui retourne le HTML du fil d'Ariane se trouvant DANS le div "menu"
 	 * Notes :
@@ -55,6 +70,26 @@ class Auto {
 	 * @return string - Le HTML du fil d'Ariane
 	 */
 
+	static public function ariane($nomMarque="", $nomModele=""){
+		 $resultat = '';
+		 $resultat .= '<nav id="ariane">';
+		 $resultat .= '<ul>';
+		 $resultat .= '<li><a href="index.php">Accueil</a></li>';
+		 $resultat .= '</ul>';
+		 $resultat .= '/nav>';
+		 
+		if(isset($nomMarque)){
+			$resultat .= '<li><span>'.$nomMarque.'</span></li>';
+		 }
+
+		if(!isset($nomMarque)){
+			$resultat .= '<li><span>'.$nomModele.'</span></li>';
+		 }
+
+		 return $resultat;
+
+	}
+
 	 
 	/** Méthode "lien" qui retourne le code HTML d'un lien retrouvé dans la page index
 	 * qui permet d'afficher les détails d'une voiture
@@ -62,6 +97,11 @@ class Auto {
 	 * @param string $nomModele - Le modele de voiture
 	 * @return string - Le HTML dw la balise <a>
 	 */
+
+	static public function lien($nomMarque, $nomModele){
+		$resultat = '<a href="index.php">Autoguide.qc</a>';
+		return $resultat;
+	}
 
 
 	/** Méthode "image" qui retourne le code HTML d'une image composé en fonction des paramètres
@@ -75,12 +115,33 @@ class Auto {
 	 * @return string - Le HTML de la balise <img>
 	 */
 
+	static public function image($nomMarque, $nomModele, $class){
+		$resultat = '<img src="images/voitures/'.$nomMarque.'_'.$nomModele.'.jpg" class="'.$class.'" alt="'.$nomMarque.' '.$nomModele.'"'.title($nomMarque, $nomModele);
+	}
+
 
 	/** Méthode "listeMarques" qui retourne le HTML du ul "listeMarques"
 	 * contenant la liste des voitures (voir maquette, page index.php) en fonction du paramètre
 	 * @param array $autos - Le array contenant les autos
 	 * @return string - Le HTML du div "listeMarques"
 	 */
+
+	static public function listeMarques($autos){
+			$resultat = '';
+			$resultat .= '<ul class="listeMarques">';
+			$resultat .= '<li><a href="marque.php?nomMarque=Ford">Ford</a>';
+			$resultat .= '<ul class="listeModeles">';
+			$resultat .= '<li><a href="modele.php?nomMarque=Ford&amp;nomModele=Fiesta"><img class="tb"';
+			$resultat .= 'src="images/voitures/ford_fiesta_tb.jpg" alt="Ford Fiesta"';
+			$resultat .= 'title="Ford Fiesta" /><span>Fiesta</span></a></li>';
+			$resultat .= '<li><a href="modele.php?nomMarque=Ford&amp;nomModele=Focus"><img class="tb"';
+			$resultat .= 'src="images/voitures/ford_focus_tb.jpg" alt="Ford Focus"';
+			$resultat .= 'title="Ford Focus" /><span>Focus</span></a></li>';
+			$resultat .= '<li><a href="modele.php?nomMarque=Ford&amp;nomModele=Fusion"><img class="tb"';
+			$resultat .= 'src="images/voitures/ford_fusion_tb.jpg" alt="Ford Fusion"';
+			$resultat .= 'title="Ford Fusion" /><span>Fusion</span></a></li>';
+			$resultat .= '</ul>';
+	}
 
 
 	 /** Méthode "listeModeles" qui retourne le HTML du ul "listeModeles"
@@ -90,6 +151,27 @@ class Auto {
 	 * @return string - Le HTML du ul "listeModeles"
 	 */
 
+	static public function listeModeles($nomMarque, $autosMarque){
+			$resultat = '';
+			$resultat .= '<ul class="listeModeles">';
+			$resultat .= '<li><a href="modele.php?nomMarque=Nissan&amp;nomModele=Versa"><img class="tb"';
+			$resultat .= 'src="images/voitures/nissan_versa_tb.jpg" alt="Nissan Versa"';
+			$resultat .= 'title="Nissan Versa" /><span>Versa</span></a></li>';
+			$resultat .= '<li><a href="modele.php?nomMarque=Nissan&amp;nomModele=Altima"><img class="tb"';
+			$resultat .= 'src="images/voitures/nissan_altima_tb.jpg" alt="Nissan Altima"';
+			$resultat .= 'title="Nissan Altima" /><span>Altima</span></a></li>';
+			$resultat .= '</ul>';
+			$resultat .= '</li>';
+			$resultat .= '<li><a href="marque.php?nomMarque=Ferrari">Ferrari</a>';
+			$resultat .= '<ul class="listeModeles">';
+			$resultat .= '<li><a href="modele.php?nomMarque=Ferrari&amp;nomModele=California"><img class="tb"';
+			$resultat .= 'src="images/voitures/ferrari_california_tb.jpg" alt="Ferrari California"';
+			$resultat .= 'title="Ferrari California" /><span>California</span></a></li>';
+			$resultat .= '</ul>';
+			$resultat .= '</li>';
+
+	}
+
 
 	/**	Méthode "ligne" qui retourne une ligne (<tr>) du tableau des caractéristiques
 	 * en fonction des paramètres (voir maquette, page modele.php)
@@ -97,6 +179,14 @@ class Auto {
 	 * @param string $contenu - Le contenu de la deuxième cellule
 	 * @param string - Le HTML du tr
 	 */
+
+	static public function ligne($etiquette, $contenu){
+			$resultat = '';
+			$resultat .= '<tr>';
+			$resultat .= '<td class="etiquette">Moteur : </td>';
+			$resultat .= '<td>V8 4,3 litres</td>';
+			$resultat .= '</tr>';
+	}
 
 
 	/** Méthode "ligne_puissance" qui retourne la ligne de la puissance (2e ligne) de la voiture
@@ -106,6 +196,14 @@ class Auto {
 	 * @param string - Le HTML du tr
 	 */
 
+	static public function ligne_puissance($voiture){
+			$resultat = '';
+			$resultat .= '<tr>';
+			$resultat .= '<td class="etiquette">Puissance : </td>';
+			$resultat .= '<td>460 ch @ 7750 tr/min</td>';
+			$resultat .= '</tr>';
+	}
+
 
 	/** Méthode "ligne_couple" qui retourne la ligne du couple de la voiture (3e ligne)
 	 * en lui donnant le format adéquat (Note : Utilise la méthode "ligne")
@@ -114,6 +212,14 @@ class Auto {
 	 * @param string - Le HTML du tr
 	 */
 
+	static public function ligne_couple($voiture){
+			$resultat = '';
+			$resultat .= '<tr>';
+			$resultat .= '<td class="etiquette">Couple : </td>';
+			$resultat .= '<td>358 lb-pi @ 5000 tr/min</td>';
+			$resultat .= '</tr>';
+	}
+
 
 	/** Méthode "ligne_transmissions" qui retourne la ligne des transmissions disponibles (voir maquette, page modele.php)
 	 * Note : Cette méthode utilise la méthode "ligne"
@@ -121,13 +227,41 @@ class Auto {
 	 * @return string - Le HTML du tr
 	 */
 
+	 static public function ligne_transmissions($voiture){
+			$resultat = '';
+			$resultat .= '<tr>';
+			$resultat .= '<td class="etiquette">Transmissions : </td>';
+			$resultat .= '<td>';
+			$resultat .= '<ul class="transmissions">';
+			$resultat .= '<li>Séquentielle</li>';
+			$resultat .= '<li>Manuelle, 6 rapports</li>';
+			$resultat .= '</ul>';
+			$resultat .= '</td>';
+			$resultat .= '</tr>';
+	 }
+			
+
 
 	/** Méthode "ligne_consommation" qui retourne la ligne de la consommation (en ville et sur autoroute) de la voiture (voir maquette, page modele.php)
 	 * Note : Cette méthode utilise la méthode "ligne"
 	 * @param array $voiture - Le array représentant la voiture
 	 * @return string - Le HTML du tr
 	 */
-	
+
+	static public function ligne_consommation($voiture){
+			$resultat = '';
+			$resultat .= '<tr>';
+			$resultat .= '<td class="etiquette">Consommation : </td>';
+			$resultat .= '<td>';
+			$resultat .= '<ul class="consommation">';
+			$resultat .= '<li>Ville : 16.9 litres/100 km</li>';
+			$resultat .= '<li>Autoroute : 10.6 litres/100 km</li>';
+			$resultat .= '</ul>';
+			$resultat .= '</td>';
+			$resultat .= '</tr>';
+	}
+
+			
 
 	/** Méthode "affichageVoiture" qui retourne le div "voiture" contenant la description d'une voiture
 	 * en fonction des paramètres (voir maquette, page modele.php)
@@ -137,6 +271,48 @@ class Auto {
 	 * @param string $nomModele - Le modele à rechercher dans la marque
 	 * @param string - Le HTML du div "voiture"
 	 */
+
+	static public function affichageVoiture($voiture, $nomMarque, $nomModele){
+		$resultat = '';
+		$resultat .= '<div class="voiture"><img class="voiture" src="images/voitures/ferrari_california.jpg"';
+		$resultat .= 'alt="Ferrari California" title="Ferrari California" />';
+		$resultat .= '<h2>Prix de base</h2>';
+		$resultat .= '<div class="prix">192000 $</div>';
+		$resultat .= '<h2>Caractéristiques</h2>';
+		$resultat .= '<table class="caracteristiques">';
+		$resultat .= '<tr>';
+		$resultat .= '<td class="etiquette">Moteur : </td>';
+		$resultat .= '<td>V8 4,3 litres</td>';
+		$resultat .= '</tr>';
+		$resultat .= '<tr>';
+		$resultat .= '<td class="etiquette">Puissance : </td>';
+		$resultat .= '<td>460 ch @ 7750 tr/min</td>';
+		$resultat .= '</tr>';
+		$resultat .= '<tr>';
+		$resultat .= '<td class="etiquette">Couple : </td>';
+		$resultat .= '<td>358 lb-pi @ 5000 tr/min</td>';
+		$resultat .= '</tr>';
+		$resultat .= '<tr>';
+		$resultat .= '<td class="etiquette">Transmissions : </td>';
+		$resultat .= '<td>';
+		$resultat .= '<ul class="transmissions">';
+		$resultat .= '<li>Séquentielle</li>';
+		$resultat .= '<li>Manuelle, 6 rapports</li>';
+		$resultat .= '</ul>';
+		$resultat .= '</td>';
+		$resultat .= '</tr>';
+		$resultat .= '<tr>';
+		$resultat .= '<td class="etiquette">Consommation : </td>';
+		$resultat .= '<td>';
+		$resultat .= '<ul class="consommation">';
+		$resultat .= '<li>Ville : 16.9 litres/100 km</li>';
+		$resultat .= '<li>Autoroute : 10.6 litres/100 km</li>';
+		$resultat .= '</ul>';
+		$resultat .= '</td>';
+		$resultat .= '</tr>';
+		$resultat .= '</table>';
+		$resultat .= '</div>';
+	}
 	
 
 }
