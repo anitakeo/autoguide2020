@@ -20,4 +20,6 @@ include_once("../src/donnees.inc.php");
 // var_dump(Auto::trouverModele($voitures, 'Lada', 'California'));
 // var_dump(Auto::trouverModele($voitures, 'Ford', 'California'));
 // var_dump(Auto::trouverModele($voitures, 'Lada', 'Fiesta'));
+// var_dump(Auto::affichageVoiture('','Ford','Fiesta'));
+var_dump(Auto::image('Ford','Fiesta','auto'));
 ?>

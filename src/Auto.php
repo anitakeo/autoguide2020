@@ -116,6 +116,7 @@ class Auto {
 	 */
 
 	static public function image($nomMarque, $nomModele, $class){
+		auto::titre($nomMarque,$nomModele);
 		$resultat = '<img src="images/voitures/'.$nomMarque.'_'.$nomModele.'.jpg" class="'.$class.'" alt="'.$nomMarque.' '.$nomModele.'"'.title($nomMarque, $nomModele);
 	}
 
@@ -127,6 +128,8 @@ class Auto {
 	 */
 
 	static public function listeMarques($autos){
+
+			//foreach
 			$resultat = '';
 			$resultat .= '<ul class="listeMarques">';
 			$resultat .= '<li><a href="marque.php?nomMarque=Ford">Ford</a>';
@@ -155,18 +158,18 @@ class Auto {
 	static public function listeModeles($nomMarque, $autosMarque){
 			$resultat = '';
 			$resultat .= '<ul class="listeModeles">';
-			$resultat .= '<li><a href="modele.php?nomMarque=Nissan&amp;nomModele=Versa"><img class="tb"';
-			$resultat .= 'src="images/voitures/nissan_versa_tb.jpg" alt="Nissan Versa"';
+			$resultat .= '<li><a href="modele.php?nomMarque='.$nomMarque.'&amp;nomModele=Versa"><img class="tb"';
+			$resultat .= 'src="images/voitures/'.$nomMarque.'_versa_tb.jpg" alt="'.$nomMarque.' Versa"';
 			$resultat .= 'title="'.$nomMarque.' Versa" /><span>Versa</span></a></li>';
-			$resultat .= '<li><a href="modele.php?nomMarque=Nissan&amp;nomModele=Altima"><img class="tb"';
-			$resultat .= 'src="images/voitures/nissan_altima_tb.jpg" alt="Nissan Altima"';
+			$resultat .= '<li><a href="modele.php?nomMarque='.$nomMarque.'&amp;nomModele=Altima"><img class="tb"';
+			$resultat .= 'src="images/voitures/'.$nomMarque.'_altima_tb.jpg" alt="'.$nomMarque.' Altima"';
 			$resultat .= 'title="'.$nomMarque.' Altima" /><span>Altima</span></a></li>';
 			$resultat .= '</ul>';
 			$resultat .= '</li>';
-			$resultat .= '<li><a href="marque.php?nomMarque=Ferrari">Ferrari</a>';
+			$resultat .= '<li><a href="marque.php?nomMarque='.$nomMarque.'">'.$nomMarque.'</a>';
 			$resultat .= '<ul class="listeModeles">';
-			$resultat .= '<li><a href="modele.php?nomMarque=Ferrari&amp;nomModele=California"><img class="tb"';
-			$resultat .= 'src="images/voitures/ferrari_california_tb.jpg" alt="Ferrari California"';
+			$resultat .= '<li><a href="modele.php?nomMarque='.$nomMarque.'&amp;nomModele=California"><img class="tb"';
+			$resultat .= 'src="images/voitures/'.$nomMarque.'_california_tb.jpg" alt="'.$nomMarque.' California"';
 			$resultat .= 'title="'.$nomMarque.' California" /><span>California</span></a></li>';
 			$resultat .= '</ul>';
 			$resultat .= '</li>';
@@ -184,8 +187,8 @@ class Auto {
 	static public function ligne($etiquette, $contenu){
 			$resultat = '';
 			$resultat .= '<tr>';
-			$resultat .= '<td class="etiquette">Moteur : </td>';
-			$resultat .= '<td>V8 4,3 litres</td>';
+			$resultat .= '<td class="'.$etiquette.'">Moteur : </td>';
+			$resultat .= '<td>'.$contenu.'</td>';
 			$resultat .= '</tr>';
 			return $resultat;
 	}
@@ -199,6 +202,7 @@ class Auto {
 	 */
 
 	static public function ligne_puissance($voiture){
+			auto::ligne($voiture);
 			$resultat = '';
 			$resultat .= '<tr>';
 			$resultat .= '<td class="etiquette">Puissance : </td>';
@@ -216,6 +220,7 @@ class Auto {
 	 */
 
 	static public function ligne_couple($voiture){
+			auto::ligne($voiture);
 			$resultat = '';
 			$resultat .= '<tr>';
 			$resultat .= '<td class="etiquette">Couple : </td>';
@@ -232,6 +237,7 @@ class Auto {
 	 */
 
 	 static public function ligne_transmissions($voiture){
+		 	auto::ligne($voiture);
 			$resultat = '';
 			$resultat .= '<tr>';
 			$resultat .= '<td class="etiquette">Transmissions : </td>';
@@ -254,6 +260,7 @@ class Auto {
 	 */
 
 	static public function ligne_consommation($voiture){
+			auto::ligne($voiture);
 			$resultat = '';
 			$resultat .= '<tr>';
 			$resultat .= '<td class="etiquette">Consommation : </td>';
@@ -280,8 +287,8 @@ class Auto {
 
 	static public function affichageVoiture($voiture, $nomMarque, $nomModele){
 		$resultat = '';
-		$resultat .= '<div class="voiture"><img class="voiture" src="images/voitures/ferrari_california.jpg"';
-		$resultat .= 'alt="Ferrari California" title="Ferrari California" />';
+		$resultat .= '<div class="voiture"><img class="voiture" src="images/voitures/'.$nomMarque.'_'.$nomModele.'.jpg"';
+		$resultat .= 'alt="'.$nomMarque.' '.$nomModele.'" title="'.$nomMarque.' '.$nomModele.'" />';
 		$resultat .= '<h2>Prix de base</h2>';
 		$resultat .= '<div class="prix">192000 $</div>';
 		$resultat .= '<h2>Caractéristiques</h2>';
