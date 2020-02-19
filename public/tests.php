@@ -3,7 +3,7 @@
 =========================================================================
 Intégration web III - TP1
 -------------------------------------------------------------------------
-Votre nom :
+Votre nom : Anita Keobouarabath
 -------------------------------------------------------------------------
 Cette page devrait contenir les tests des méthodes
 - Inclure le fichier de la class Auto
@@ -14,6 +14,10 @@ Cette page devrait contenir les tests des méthodes
 include_once("../src/Auto.php");
 include_once("../src/donnees.inc.php");
 /*LIGNE DE TEST*/
-echo Auto::titre('Ford', 'Fiesta', 'strong');
+// echo Auto::titre('Ford', 'Fiesta', 'strong');
 // ... CONTINUER ...
+// echo Auto::titre('Boudreau', 'Martin','h1');
+// var_dump(Auto::trouverModele($voitures, 'Lada', 'California'));
+// var_dump(Auto::trouverModele($voitures, 'Ford', 'California'));
+// var_dump(Auto::trouverModele($voitures, 'Lada', 'Fiesta'));
 ?>

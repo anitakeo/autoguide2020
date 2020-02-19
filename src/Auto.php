@@ -3,7 +3,7 @@
 =========================================================================
 Intégration web III - TP1
 -------------------------------------------------------------------------
-Votre nom :
+Votre nom : Anita Keobouarabath
 -------------------------------------------------------------------------
 - Compléter les méthodes suivantes
 - Toutes les méthodes sont statiques
@@ -141,6 +141,7 @@ class Auto {
 			$resultat .= 'src="images/voitures/ford_fusion_tb.jpg" alt="Ford Fusion"';
 			$resultat .= 'title="Ford Fusion" /><span>Fusion</span></a></li>';
 			$resultat .= '</ul>';
+			return $resultat;
 	}
 
 
@@ -156,20 +157,20 @@ class Auto {
 			$resultat .= '<ul class="listeModeles">';
 			$resultat .= '<li><a href="modele.php?nomMarque=Nissan&amp;nomModele=Versa"><img class="tb"';
 			$resultat .= 'src="images/voitures/nissan_versa_tb.jpg" alt="Nissan Versa"';
-			$resultat .= 'title="Nissan Versa" /><span>Versa</span></a></li>';
+			$resultat .= 'title="'.$nomMarque.' Versa" /><span>Versa</span></a></li>';
 			$resultat .= '<li><a href="modele.php?nomMarque=Nissan&amp;nomModele=Altima"><img class="tb"';
 			$resultat .= 'src="images/voitures/nissan_altima_tb.jpg" alt="Nissan Altima"';
-			$resultat .= 'title="Nissan Altima" /><span>Altima</span></a></li>';
+			$resultat .= 'title="'.$nomMarque.' Altima" /><span>Altima</span></a></li>';
 			$resultat .= '</ul>';
 			$resultat .= '</li>';
 			$resultat .= '<li><a href="marque.php?nomMarque=Ferrari">Ferrari</a>';
 			$resultat .= '<ul class="listeModeles">';
 			$resultat .= '<li><a href="modele.php?nomMarque=Ferrari&amp;nomModele=California"><img class="tb"';
 			$resultat .= 'src="images/voitures/ferrari_california_tb.jpg" alt="Ferrari California"';
-			$resultat .= 'title="Ferrari California" /><span>California</span></a></li>';
+			$resultat .= 'title="'.$nomMarque.' California" /><span>California</span></a></li>';
 			$resultat .= '</ul>';
 			$resultat .= '</li>';
-
+			return $resultat;
 	}
 
 
@@ -186,6 +187,7 @@ class Auto {
 			$resultat .= '<td class="etiquette">Moteur : </td>';
 			$resultat .= '<td>V8 4,3 litres</td>';
 			$resultat .= '</tr>';
+			return $resultat;
 	}
 
 
@@ -202,6 +204,7 @@ class Auto {
 			$resultat .= '<td class="etiquette">Puissance : </td>';
 			$resultat .= '<td>460 ch @ 7750 tr/min</td>';
 			$resultat .= '</tr>';
+			return $resultat;
 	}
 
 
@@ -218,6 +221,7 @@ class Auto {
 			$resultat .= '<td class="etiquette">Couple : </td>';
 			$resultat .= '<td>358 lb-pi @ 5000 tr/min</td>';
 			$resultat .= '</tr>';
+			return $resultat;
 	}
 
 
@@ -238,6 +242,7 @@ class Auto {
 			$resultat .= '</ul>';
 			$resultat .= '</td>';
 			$resultat .= '</tr>';
+			return $resultat;
 	 }
 			
 
@@ -259,6 +264,7 @@ class Auto {
 			$resultat .= '</ul>';
 			$resultat .= '</td>';
 			$resultat .= '</tr>';
+			return $resultat;
 	}
 
 			
@@ -312,6 +318,7 @@ class Auto {
 		$resultat .= '</tr>';
 		$resultat .= '</table>';
 		$resultat .= '</div>';
+		return $resultat;
 	}
 	
 
