@@ -70,6 +70,9 @@ class Auto {
 	 * @return string - Le HTML du fil d'Ariane
 	 */
 
+	// Elle affiche le mot Accueil, si $nomMarque n'est pas fournie.
+	// Elle affiche le nom de la marque, mais pas Index.
+
 	static public function ariane($nomMarque="", $nomModele=""){
 		 $resultat = '';
 		 $resultat .= '<nav id="ariane">';
@@ -86,7 +89,7 @@ class Auto {
 			$resultat .= '<li><span>'.$nomModele.'</span></li>';
 		 }
 
-		 return $resultat;
+		return $resultat;
 
 	}
 
@@ -95,11 +98,46 @@ class Auto {
 	 * qui permet d'afficher les détails d'une voiture
 	 * @param string $nomMarque - La marque de voiture
 	 * @param string $nomModele - Le modele de voiture
-	 * @return string - Le HTML dw la balise <a>
+	 * @return string - Le HTML de la balise <a>
 	 */
 
+	// N'affiche pas les détails d'une voiture.
+
 	static public function lien($nomMarque, $nomModele){
-		$resultat = '<a href="index.php">Autoguide.qc</a>';
+		$resultat = '';
+		$resultat .= '<ul class="listeMarques">';
+		$resultat .= '<li><a href="marque.php?nomMarque='.$nomMarque.'">'.$nomMarque.'</a>';
+		$resultat .= '<ul class="listeModeles">';
+		$resultat .= '<li><a href="modele.php?nomMarque='.$nomMarque.'&amp;nomModele='.$nomModele.'"><img class="tb"';
+		$resultat .= 'src="images/voitures/'.$nomMarque.'_'.$nomModele.'_tb.jpg" alt="'.$nomMarque.' '.$nomModele.'"';
+		$resultat .= 'title="'.$nomMarque.' '.$nomModele.'" /><span>'.$nomModele.'</span></a></li>';
+		$resultat .= '<li><a href="modele.php?nomMarque='.$nomMarque.'&amp;nomModele='.$nomModele.'"><img class="tb"';
+		$resultat .= 'src="images/voitures/'.$nomMarque.'_'.$nomModele.'_tb.jpg" alt="'.$nomMarque.' '.$nomModele.'"';
+		$resultat .= 'title="'.$nomMarque.' '.$nomModele.'" /><span>'.$nomModele.'</span></a></li>';
+		$resultat .= '<li><a href="modele.php?nomMarque='.$nomMarque.'&amp;nomModele='.$nomModele.'"><img class="tb"';
+		$resultat .= 'src="images/voitures/'.$nomMarque.'_'.$nomModele.'_tb.jpg" alt="'.$nomMarque.' '.$nomModele.'"';
+		$resultat .= 'title="'.$nomMarque.' '.$nomModele.'" /><span>'.$nomModele.'</span></a></li>';
+		$resultat .= '</ul>';
+		$resultat .= '</li>';
+		$resultat .= '<li><a href="marque.php?nomMarque='.$nomMarque.'">'.$nomMarque.'</a>';
+		$resultat .= '<ul class="listeModeles">';
+		$resultat .= '<li><a href="modele.php?nomMarque='.$nomMarque.'&amp;nomModele='.$nomModele.'"><img class="tb"';
+		$resultat .= 'src="images/voitures/'.$nomMarque.'_'.$nomModele.'_tb.jpg" alt="'.$nomMarque.' '.$nomModele.'"';
+		$resultat .= 'title="'.$nomMarque.' '.$nomModele.'" /><span>'.$nomModele.'</span></a></li>';
+		$resultat .= '<li><a href="modele.php?nomMarque='.$nomMarque.'&amp;nomModele='.$nomModele.'"><img class="tb"';
+		$resultat .= 'src="images/voitures/'.$nomMarque.'_'.$nomModele.'_tb.jpg" alt="'.$nomMarque.' '.$nomModele.'"';
+		$resultat .= 'title="'.$nomMarque.' '.$nomModele.'" /><span>'.$nomModele.'</span></a></li>';
+		$resultat .= '</ul>';
+		$resultat .= '</li>';
+		$resultat .= '<li><a href="marque.php?nomMarque='.$nomMarque.'">'.$nomMarque.'</a>';
+		$resultat .= '<ul class="listeModeles">';
+		$resultat .= '<li><a href="modele.php?nomMarque='.$nomMarque.'&amp;nomModele='.$nomModele.'"><img class="tb"';
+		$resultat .= 'src="images/voitures/'.$nomMarque.'_'.$nomModele.'_tb.jpg" alt="'.$nomMarque.' '.$nomModele.'"';
+		$resultat .= 'title="'.$nomMarque.' '.$nomModele.'" /><span>'.$nomModele.'</span></a></li>';
+		$resultat .= '</ul>';
+		$resultat .= '</li>';
+		$resultat .= '</ul>';
+
 		return $resultat;
 	}
 
@@ -115,9 +153,11 @@ class Auto {
 	 * @return string - Le HTML de la balise <img>
 	 */
 
+	// "NULL"
+
 	static public function image($nomMarque, $nomModele, $class){
 		auto::titre($nomMarque,$nomModele);
-		$resultat = '<img src="images/voitures/'.$nomMarque.'_'.$nomModele.'.jpg" class="'.$class.'" alt="'.$nomMarque.' '.$nomModele.'"'.title($nomMarque, $nomModele);
+		$resultat = '<img src="images/voitures/'.$nomMarque.'_'.$nomModele.'_tb.jpg" class="'.$class.'" alt="'.$nomMarque.' '.$nomModele.'"';
 	}
 
 
@@ -127,9 +167,10 @@ class Auto {
 	 * @return string - Le HTML du div "listeMarques"
 	 */
 
+	// Il affiche la liste de tous les marques.
+
 	static public function listeMarques($autos){
 
-			//foreach
 			$resultat = '';
 			$resultat .= '<ul class="listeMarques">';
 			$resultat .= '<li><a href="marque.php?nomMarque=Ford">Ford</a>';
@@ -144,6 +185,26 @@ class Auto {
 			$resultat .= 'src="images/voitures/ford_fusion_tb.jpg" alt="Ford Fusion"';
 			$resultat .= 'title="Ford Fusion" /><span>Fusion</span></a></li>';
 			$resultat .= '</ul>';
+			$resultat .= '</li>';
+			$resultat .= '<li><a href="marque.php?nomMarque=Nissan">Nissan</a>';
+			$resultat .= '<ul class="listeModeles">';
+			$resultat .= '<li><a href="modele.php?nomMarque=Nissan&amp;nomModele=Versa"><img class="tb"';
+			$resultat .= 'src="images/voitures/nissan_versa_tb.jpg" alt="Nissan Versa"';
+			$resultat .= 'title="Nissan Versa" /><span>Versa</span></a></li>';
+			$resultat .= '<li><a href="modele.php?nomMarque=Nissan&amp;nomModele=Altima"><img class="tb"';
+			$resultat .= 'src="images/voitures/nissan_altima_tb.jpg" alt="Nissan Altima"';
+			$resultat .= 'title="Nissan Altima" /><span>Altima</span></a></li>';
+			$resultat .= '</ul>';
+			$resultat .= '</li>';
+			$resultat .= '<li><a href="marque.php?nomMarque=Ferrari">Ferrari</a>';
+			$resultat .= '<ul class="listeModeles">';
+			$resultat .= '<li><a href="modele.php?nomMarque=Ferrari&amp;nomModele=California"><img class="tb"';
+			$resultat .= 'src="images/voitures/ferrari_california_tb.jpg" alt="Ferrari California"';
+			$resultat .= 'title="Ferrari California" /><span>California</span></a></li>';
+			$resultat .= '</ul>';
+			$resultat .= '</li>';
+			$resultat .= '</ul>';
+			
 			return $resultat;
 	}
 
@@ -154,6 +215,8 @@ class Auto {
 	 * @param array $autosMarque - Le array contenant les autos
 	 * @return string - Le HTML du ul "listeModeles"
 	 */
+
+	// Cela retourne la liste de modèles.
 
 	static public function listeModeles($nomMarque, $autosMarque){
 			$resultat = '';
@@ -173,7 +236,12 @@ class Auto {
 			$resultat .= 'title="'.$nomMarque.' California" /><span>California</span></a></li>';
 			$resultat .= '</ul>';
 			$resultat .= '</li>';
+			
 			return $resultat;
+
+			$resultat = $autosMarque[$nomMarque];
+
+
 	}
 
 

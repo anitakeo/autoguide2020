@@ -21,5 +21,10 @@ include_once("../src/donnees.inc.php");
 // var_dump(Auto::trouverModele($voitures, 'Ford', 'California'));
 // var_dump(Auto::trouverModele($voitures, 'Lada', 'Fiesta'));
 // var_dump(Auto::affichageVoiture('','Ford','Fiesta'));
-var_dump(Auto::image('Ford','Fiesta','auto'));
+// var_dump(Auto::ariane(''));
+// var_dump(Auto::ariane('Ford'));
+// var_dump(Auto::lien('Ford', 'California'));
+// var_dump(Auto::image('Ford', 'California','voiture'));
+// var_dump(Auto::listeMarques(''));
+var_dump(Auto::listeModeles('Ford', ''));
 ?>
