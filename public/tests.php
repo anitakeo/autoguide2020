@@ -23,8 +23,12 @@ include_once("../src/donnees.inc.php");
 // var_dump(Auto::affichageVoiture('','Ford','Fiesta'));
 // var_dump(Auto::ariane(''));
 // var_dump(Auto::ariane('Ford'));
-// var_dump(Auto::lien('Ford', 'California'));
+// var_dump(Auto::lien('Ferrari', 'California'));
 // var_dump(Auto::image('Ford', 'California','voiture'));
 // var_dump(Auto::listeMarques(''));
-var_dump(Auto::listeModeles('Ford', ''));
+// var_dump(Auto::listeModeles('Ford', ''));
+// var_dump(Auto::image('ferrari', 'california','voiture'));
+// var_dump(Auto::listeModeles('ford','fiesta'));
+// var_dump(Auto::listeMarques('Ford'));
+var_dump(Auto::listeModeles(''));
 ?>
