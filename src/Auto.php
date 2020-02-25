@@ -126,14 +126,18 @@ class Auto {
 	// Est-ce qu'il faut remplacer voiture par $class ? ou définir $class avec le mot "voiture".
 	// Ce code arrive à afficher les images du tableau. Mais si je met une autre classe que voiture, le résultat reste pareil.
 
-	static public function image($nomMarque, $nomModele, $class){
-		$resultat = '';
-		$resultat .= auto::titre($nomMarque,$nomModele);
-		$resultat .= '<img src="images/voitures/'.$nomMarque.'_'.$nomModele.'.jpg" class="'.$class.'" alt="'.$nomMarque.' '.$nomModele.'" title="'.$nomMarque.' '.$nomModele.'" />';
-
+	static public function image($nomMarque, $nomModele, $class="voiture"){
+		
 		if(!isset($class)){
 			$resultat .= '<img src="images/voitures/'.$nomMarque.'_'.$nomModele.'.jpg" class="'.$class.'_tb alt="'.$nomMarque.' '.$nomModele.'" title="'.$nomMarque.' '.$nomModele.'" />';
 		}
+		else{
+			$resultat = '';
+			$resultat .= auto::titre($nomMarque,$nomModele);
+			$resultat .= '<img src="images/voitures/'.$nomMarque.'_'.$nomModele.'.jpg" class="'.$class.'" alt="'.$nomMarque.' '.$nomModele.'" title="'.$nomMarque.' '.$nomModele.'" />';
+
+		}
+
 		return $resultat;
 	}
 
