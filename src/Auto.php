@@ -77,18 +77,23 @@ class Auto {
 		 $resultat = '';
 		 $resultat .= '<nav id="ariane">';
 		 $resultat .= '<ul>';
-		 $resultat .= '<li><a href="index.php">Accueil</a></li>';
-		 $resultat .= '</ul>';
-		 $resultat .= '/nav>';
-		 
-		if(isset($nomMarque)){
-			$resultat .= '<li><span>'.$nomMarque.'</span></li>';
-		 }
 
-		if(!isset($nomMarque)){
-			$resultat .= '<li><span>'.$nomModele.'</span></li>';
+		 if($nomMarque){
+			 $resultat .= '<li><a href="index.php">Accueil</a></li>';
+			 $resultat .= '<li><span>'.$nomMarque.'</span></li>';
 		 }
-		return $resultat;
+		 else{
+			 $resultat .= '<li>Accueil</li>';;
+		 } 
+			 
+		 if($nomModele){
+			 $resultat .= '<li><span>'.$nomModele.'</span></li>';
+		  }
+		  
+		  $resultat .= '</ul>';
+		  $resultat .= '</nav>';
+		  
+		  return $resultat;
 
 	}
 
@@ -125,19 +130,17 @@ class Auto {
 
 	// Est-ce qu'il faut remplacer voiture par $class ? ou définir $class avec le mot "voiture".
 	// Ce code arrive à afficher les images du tableau. Mais si je met une autre classe que voiture, le résultat reste pareil.
+	// Bonne version
 
 	static public function image($nomMarque, $nomModele, $class="voiture"){
+		$resultat = '';
 		
-		if(!isset($class)){
-			$resultat .= '<img src="images/voitures/'.$nomMarque.'_'.$nomModele.'.jpg" class="'.$class.'_tb alt="'.$nomMarque.' '.$nomModele.'" title="'.$nomMarque.' '.$nomModele.'" />';
-		}
-		else{
-			$resultat = '';
-			$resultat .= auto::titre($nomMarque,$nomModele);
-			$resultat .= '<img src="images/voitures/'.$nomMarque.'_'.$nomModele.'.jpg" class="'.$class.'" alt="'.$nomMarque.' '.$nomModele.'" title="'.$nomMarque.' '.$nomModele.'" />';
+		if($class != "voiture"){
+			$resultat .= '<img src="images/voitures/'.$nomMarque.'_'.$nomModele.'_tb.jpg" class="'.$class.' alt="'.$nomMarque.' '.$nomModele.'" title="'.$nomMarque.' '.$nomModele.'" />';
+		}else{
+			$resultat .= '<img src="images/voitures/'.$nomMarque.'_'.$nomModele.'.jpg" class="'.$class.'" alt="'.$nomMarque.' '.$nomModele.'" title="'.Auto::titre($nomMarque,$nomModele).'" />';
 
 		}
-
 		return $resultat;
 	}
 
