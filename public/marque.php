@@ -1,6 +1,6 @@
 <?php
-include "C:\Users\anime\Downloads\Web3\autoguide2020-4\src\Auto.php";
-include "C:\Users\anime\Downloads\Web3\autoguide2020-4\src\donnees.inc.php";
+include "../src/Auto.php";
+include "../src/donnees.inc.php";
 /*
 =========================================================================
 Intégration web III - TP1
@@ -17,7 +17,6 @@ Cette page affiche la liste des modèles en fonction de la marque fournie dans l
 - Si la marque ne se trouve pas dans la variable $voitures, on DOIT retourner à la page index.php
 =========================================================================
 */
-
 
 ?>
 <!DOCTYPE html>

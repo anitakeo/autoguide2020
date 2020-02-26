@@ -156,39 +156,16 @@ class Auto {
 
 			$resultat = '';
 			$resultat .= '<ul class="listeMarques">';
-			$resultat .= '<li><a href="marque.php?nomMarque=Ford">Ford</a>';
-			$resultat .= '<ul class="listeModeles">';
-			$resultat .= '<li><a href="modele.php?nomMarque=Ford&amp;nomModele=Fiesta"><img class="tb"';
-			$resultat .= 'src="images/voitures/ford_fiesta_tb.jpg" alt="Ford Fiesta"';
-			$resultat .= 'title="Ford Fiesta" /><span>Fiesta</span></a></li>';
-			$resultat .= '<li><a href="modele.php?nomMarque=Ford&amp;nomModele=Focus"><img class="tb"';
-			$resultat .= 'src="images/voitures/ford_focus_tb.jpg" alt="Ford Focus"';
-			$resultat .= 'title="Ford Focus" /><span>Focus</span></a></li>';
-			$resultat .= '<li><a href="modele.php?nomMarque=Ford&amp;nomModele=Fusion"><img class="tb"';
-			$resultat .= 'src="images/voitures/ford_fusion_tb.jpg" alt="Ford Fusion"';
-			$resultat .= 'title="Ford Fusion" /><span>Fusion</span></a></li>';
-			$resultat .= '</ul>';
-			$resultat .= '</li>';
-			$resultat .= '<li><a href="marque.php?nomMarque=Nissan">Nissan</a>';
-			$resultat .= '<ul class="listeModeles">';
-			$resultat .= '<li><a href="modele.php?nomMarque=Nissan&amp;nomModele=Versa"><img class="tb"';
-			$resultat .= 'src="images/voitures/nissan_versa_tb.jpg" alt="Nissan Versa"';
-			$resultat .= 'title="Nissan Versa" /><span>Versa</span></a></li>';
-			$resultat .= '<li><a href="modele.php?nomMarque=Nissan&amp;nomModele=Altima"><img class="tb"';
-			$resultat .= 'src="images/voitures/nissan_altima_tb.jpg" alt="Nissan Altima"';
-			$resultat .= 'title="Nissan Altima" /><span>Altima</span></a></li>';
-			$resultat .= '</ul>';
-			$resultat .= '</li>';
-			$resultat .= '<li><a href="marque.php?nomMarque=Ferrari">Ferrari</a>';
-			$resultat .= '<ul class="listeModeles">';
-			$resultat .= '<li><a href="modele.php?nomMarque=Ferrari&amp;nomModele=California"><img class="tb"';
-			$resultat .= 'src="images/voitures/ferrari_california_tb.jpg" alt="Ferrari California"';
-			$resultat .= 'title="Ferrari California" /><span>California</span></a></li>';
-			$resultat .= '</ul>';
-			$resultat .= '</li>';
-			$resultat .= '</ul>';
-
+			// $nomMarque est une clée ('Ford'=>array) et array est une valeur, comme $autoMarque.
+        	foreach($autos as $nomMarque => $autoMarque){
+            $resultat .= '<li><a href="marque.php?nomMarque='.$nomMarque.'">'.$nomMarque.'</a>';
+            // $resultat .= self::listeModeles($nomMarque,$autoMarque);
+            $resultat .= '</li>';
+        }
+        	$resultat .= '</ul>';
 			return $resultat;
+
+
 	}
 
 
@@ -204,8 +181,7 @@ class Auto {
 	static public function listeModeles($nomMarque, $autosMarque){
 	
 			$resultat .= auto::listeMarques();
-			
-
+	
 			foreach($autosMarque as $nomMarque -> $nomModele){
 				$resultat = '';
 				$resultat .= '<ul class="listeModeles">';
@@ -337,6 +313,8 @@ class Auto {
 	 * @param string $nomModele - Le modele à rechercher dans la marque
 	 * @param string - Le HTML du div "voiture"
 	 */
+
+	 //
 
 	static public function affichageVoiture($voiture, $nomMarque, $nomModele){
 		$resultat = '';

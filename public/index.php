@@ -1,6 +1,6 @@
 <?php
-include "C:\Users\anime\Downloads\Web3\autoguide2020-4\src\Auto.php";
-include "C:\Users\anime\Downloads\Web3\autoguide2020-4\src\donnees.inc.php";
+include "../src/Auto.php";
+include "../src/donnees.inc.php";
 /*
 =========================================================================
 Intégration web III - TP1
