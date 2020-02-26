@@ -1,9 +1,11 @@
 <?php
+include "C:\Users\anime\Downloads\Web3\autoguide2020-4\src\Auto.php";
+include "C:\Users\anime\Downloads\Web3\autoguide2020-4\src\donnees.inc.php";
 /*
 =========================================================================
 Intégration web III - TP1
 -------------------------------------------------------------------------
-Votre nom :
+Votre nom : Anita Keobouarabath
 -------------------------------------------------------------------------
 Cette page affiche la liste des modèles en fonction de la marque fournie dans l'adresse
 - Inclure le fichier de la class Auto

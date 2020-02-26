@@ -23,12 +23,15 @@ include_once("../src/donnees.inc.php");
 // var_dump(Auto::affichageVoiture('','Ford','Fiesta'));
 // var_dump(Auto::ariane(''));
 // var_dump(Auto::ariane('Ford','Fiesta'));
-// var_dump(Auto::lien('Ferrari', 'California'));
-var_dump(Auto::image('Ferrari', 'California','patate'));
-// var_dump(Auto::listeMarques(''));
+var_dump(Auto::lien('Ford', 'Fiesta'));
+// var_dump(Auto::image('Ferrari', 'California','patate'));
+// var_dump(Auto::image('Ferrari', 'California','voiture'));
+// var_dump(Auto::listeMarques('Patate','Allo'));
 // var_dump(Auto::listeModeles('Ford', ''));
 // var_dump(Auto::image('ferrari', 'california','voiture'));
 // var_dump(Auto::listeModeles('ford','fiesta'));
 // var_dump(Auto::listeMarques('Ford'));
 // var_dump(Auto::listeModeles(''));
+// var_dump(Auto::ligne("allo","chat"));
+// var_dump(Auto::ligne_puissance("allo","chat"));
 ?>

@@ -1,4 +1,5 @@
 <?php
+include 'donnees.inc.php';
 /*
 =========================================================================
 Intégration web III - TP1
@@ -56,7 +57,6 @@ class Auto {
 
 		$resultat = $autos[$nomMarque][$nomModele];
 			return $resultat;
-
 	}
 
 
@@ -109,9 +109,9 @@ class Auto {
 
 	static public function lien($nomMarque, $nomModele){
 		$resultat = '';
-		$resultat .= '<li><a href="modele.php?nomMarque='.$nomMarque.'&amp;nomModele='.$nomModele.'"><img class="tb"';
+		$resultat .= '<a href="modele.php?nomMarque='.$nomMarque.'&amp;nomModele='.$nomModele.'"><img class="tb"';
 		$resultat .= 'src="images/voitures/'.$nomMarque.'_'.$nomModele.'_tb.jpg" alt="'.$nomMarque.' '.$nomModele.'"';
-		$resultat .= 'title="'.$nomMarque.' '.$nomModele.'" /><span>'.$nomModele.'</span></a></li>';
+		$resultat .= 'title="'.$nomMarque.' '.$nomModele.'" /><span>'.$nomModele.'</span></a>';
 		return $resultat;
 	}
 
@@ -128,8 +128,6 @@ class Auto {
 	 * @return string - Le HTML de la balise <img>
 	 */
 
-	// Est-ce qu'il faut remplacer voiture par $class ? ou définir $class avec le mot "voiture".
-	// Ce code arrive à afficher les images du tableau. Mais si je met une autre classe que voiture, le résultat reste pareil.
 	// Bonne version
 
 	static public function image($nomMarque, $nomModele, $class="voiture"){
@@ -152,6 +150,7 @@ class Auto {
 	 */
 
 	// Il affiche la liste de tous les marques et les modèles.
+	// À revoir
 
 	static public function listeMarques($autos){
 
@@ -160,30 +159,30 @@ class Auto {
 			$resultat .= '<li><a href="marque.php?nomMarque=Ford">Ford</a>';
 			$resultat .= '<ul class="listeModeles">';
 			$resultat .= '<li><a href="modele.php?nomMarque=Ford&amp;nomModele=Fiesta"><img class="tb"';
-			$resultat .= 'src="images/'.$autos.'/ford_fiesta_tb.jpg" alt="Ford Fiesta"';
+			$resultat .= 'src="images/voitures/ford_fiesta_tb.jpg" alt="Ford Fiesta"';
 			$resultat .= 'title="Ford Fiesta" /><span>Fiesta</span></a></li>';
 			$resultat .= '<li><a href="modele.php?nomMarque=Ford&amp;nomModele=Focus"><img class="tb"';
-			$resultat .= 'src="images/'.$autos.'/ford_focus_tb.jpg" alt="Ford Focus"';
+			$resultat .= 'src="images/voitures/ford_focus_tb.jpg" alt="Ford Focus"';
 			$resultat .= 'title="Ford Focus" /><span>Focus</span></a></li>';
 			$resultat .= '<li><a href="modele.php?nomMarque=Ford&amp;nomModele=Fusion"><img class="tb"';
-			$resultat .= 'src="images/'.$autos.'/ford_fusion_tb.jpg" alt="Ford Fusion"';
+			$resultat .= 'src="images/voitures/ford_fusion_tb.jpg" alt="Ford Fusion"';
 			$resultat .= 'title="Ford Fusion" /><span>Fusion</span></a></li>';
 			$resultat .= '</ul>';
 			$resultat .= '</li>';
 			$resultat .= '<li><a href="marque.php?nomMarque=Nissan">Nissan</a>';
 			$resultat .= '<ul class="listeModeles">';
 			$resultat .= '<li><a href="modele.php?nomMarque=Nissan&amp;nomModele=Versa"><img class="tb"';
-			$resultat .= 'src="images/'.$autos.'/nissan_versa_tb.jpg" alt="Nissan Versa"';
+			$resultat .= 'src="images/voitures/nissan_versa_tb.jpg" alt="Nissan Versa"';
 			$resultat .= 'title="Nissan Versa" /><span>Versa</span></a></li>';
 			$resultat .= '<li><a href="modele.php?nomMarque=Nissan&amp;nomModele=Altima"><img class="tb"';
-			$resultat .= 'src="images/'.$autos.'/nissan_altima_tb.jpg" alt="Nissan Altima"';
+			$resultat .= 'src="images/voitures/nissan_altima_tb.jpg" alt="Nissan Altima"';
 			$resultat .= 'title="Nissan Altima" /><span>Altima</span></a></li>';
 			$resultat .= '</ul>';
 			$resultat .= '</li>';
 			$resultat .= '<li><a href="marque.php?nomMarque=Ferrari">Ferrari</a>';
 			$resultat .= '<ul class="listeModeles">';
 			$resultat .= '<li><a href="modele.php?nomMarque=Ferrari&amp;nomModele=California"><img class="tb"';
-			$resultat .= 'src="images/'.$autos.'/ferrari_california_tb.jpg" alt="Ferrari California"';
+			$resultat .= 'src="images/voitures/ferrari_california_tb.jpg" alt="Ferrari California"';
 			$resultat .= 'title="Ferrari California" /><span>California</span></a></li>';
 			$resultat .= '</ul>';
 			$resultat .= '</li>';
@@ -204,7 +203,24 @@ class Auto {
 
 	static public function listeModeles($nomMarque, $autosMarque){
 	
-			$resultat = auto::listeMarques($autos);
+			$resultat .= auto::listeMarques();
+			
+
+			foreach($autosMarque as $nomMarque -> $nomModele){
+				$resultat = '';
+				$resultat .= '<ul class="listeModeles">';
+				$resultat .= '<li><a href="modele.php?nomMarque=Ford&amp;nomModele='.$nomModele.'"><img class="tb"';
+				$resultat .= 'src="images/voitures/ford_'.$nomModele.'_tb.jpg" alt="Ford '.$nomModele.'"';
+				$resultat .= 'title="'.$nomMarque.' '.$nomModele.'" /><span>'.$nomModele.'</span></a></li>';
+				$resultat .= '<li><a href="modele.php?nomMarque=Ford&amp;nomModele=Focus"><img class="tb"';
+				$resultat .= 'src="images/voitures/ford_focus_tb.jpg" alt="Ford Focus"';
+				$resultat .= 'title="'.$nomMarque.' Focus" /><span>Focus</span></a></li>';
+				$resultat .= '<li><a href="modele.php?nomMarque=Ford&amp;nomModele=Fusion"><img class="tb"';
+				$resultat .= 'src="images/voitures/ford_fusion_tb.jpg" alt="Ford Fusion"';
+				$resultat .= 'title="'.$nomMarque.' Fusion" /><span>Fusion</span></a></li>';
+				$resultat .= '</ul>';
+			}
+			
 			return $resultat;
 
 	}
@@ -217,12 +233,16 @@ class Auto {
 	 * @param string - Le HTML du tr
 	 */
 
+	//GOOD
+
 	static public function ligne($etiquette, $contenu){
+
 			$resultat = '';
 			$resultat .= '<tr>';
-			$resultat .= '<td class="'.$etiquette.'">Moteur : </td>';
+			$resultat .= '<td class="etiquette">'.$etiquette.' : </td>';
 			$resultat .= '<td>'.$contenu.'</td>';
 			$resultat .= '</tr>';
+
 			return $resultat;
 	}
 
@@ -235,11 +255,11 @@ class Auto {
 	 */
 
 	static public function ligne_puissance($voiture){
-			auto::ligne($voiture);
+			// auto::ligne();
 			$resultat = '';
 			$resultat .= '<tr>';
-			$resultat .= '<td class="etiquette">Puissance : </td>';
-			$resultat .= '<td>460 ch @ 7750 tr/min</td>';
+			$resultat .= '<td class="etiquette"> '.$voiture[1].': </td>';
+			$resultat .= '<td></td>';
 			$resultat .= '</tr>';
 			return $resultat;
 	}
@@ -256,7 +276,7 @@ class Auto {
 			auto::ligne($voiture);
 			$resultat = '';
 			$resultat .= '<tr>';
-			$resultat .= '<td class="etiquette">Couple : </td>';
+			$resultat .= '<td class="etiquette">'.$voiture.' : </td>';
 			$resultat .= '<td>358 lb-pi @ 5000 tr/min</td>';
 			$resultat .= '</tr>';
 			return $resultat;
@@ -320,8 +340,8 @@ class Auto {
 
 	static public function affichageVoiture($voiture, $nomMarque, $nomModele){
 		$resultat = '';
-		$resultat .= '<div class="voiture"><img class="voiture" src="images/voitures/'.$nomMarque.'_'.$nomModele.'.jpg"';
-		$resultat .= 'alt="'.$nomMarque.' '.$nomModele.'" title="'.$nomMarque.' '.$nomModele.'" />';
+		$resultat .= '<div class="voiture"><img class="voiture" src="images/voitures/ferrari_california.jpg"';
+		$resultat .= 'alt="Ferrari California" title="Ferrari California" />';
 		$resultat .= '<h2>Prix de base</h2>';
 		$resultat .= '<div class="prix">192000 $</div>';
 		$resultat .= '<h2>Caractéristiques</h2>';
@@ -358,6 +378,7 @@ class Auto {
 		$resultat .= '</tr>';
 		$resultat .= '</table>';
 		$resultat .= '</div>';
+
 		return $resultat;
 	}
 	
