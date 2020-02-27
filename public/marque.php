@@ -1,6 +1,11 @@
 <?php
 include "../src/Auto.php";
 include "../src/donnees.inc.php";
+$nomMarque = $_GET['nomMarque'];
+if(isset($voitures[$nomMarque]) == false){
+	header('location:index.php');
+}
+
 /*
 =========================================================================
 Intégration web III - TP1
@@ -49,11 +54,7 @@ Cette page affiche la liste des modèles en fonction de la marque fournie dans l
 					<h1>Ferrari</h1>
 				</header>
 				<!-- /* Faire afficher la liste de modèles ici; */ -->
-				<ul class="listeModeles">
-					<li><a href="modele.php?nomMarque=Ferrari&amp;nomModele=California"><img class="tb"
-								src="images/voitures/ferrari_california_tb.jpg" alt="Ferrari California"
-								title="Ferrari California" /><span>California</span></a></li>
-				</ul>
+				<?php echo Auto::listeModeles($nomMarque,$voitures[$nomMarque])?>
 			</article>
 		</section>
 		<!-- /* Inclure le footer ici */ -->

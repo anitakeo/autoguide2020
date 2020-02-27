@@ -47,7 +47,7 @@ class Auto {
 	 */
 
 	static public function trouverModele($autos, $nomMarque, $nomModele){
-		if(!isset($autos[nomMarque])){
+		if(!isset($autos[$nomMarque])){
 			 return false;
 		}
 	 
@@ -79,17 +79,20 @@ class Auto {
 		 $resultat .= '<ul>';
 
 		 if($nomMarque){
-			 $resultat .= '<li><a href="index.php">Accueil</a></li>';
-			 $resultat .= '<li><span>'.$nomMarque.'</span></li>';
+			 $resultatAriane = '<li><a href="index.php">Accueil</a></li>';
+			 $resultatAriane .= '<li><span>'.$nomMarque.'</span></li>';
 		 }
 		 else{
-			 $resultat .= '<li>Accueil</li>';;
+			 $resultatAriane = '<li>Accueil</li>';;
 		 } 
 			 
 		 if($nomModele){
-			 $resultat .= '<li><span>'.$nomModele.'</span></li>';
+			 $resultatAriane =  '<li><a href="index.php">Accueil</a></li>';
+			 $resultatAriane .= '<li><a href="marque.php?nomMarque='.$nomMarque.'">'.$nomMarque.'</a></li>';
+			 $resultatAriane .= '<li><span>'.$nomModele.'</span></li>'; 
 		  }
-		  
+
+		  $resultat .= $resultatAriane;
 		  $resultat .= '</ul>';
 		  $resultat .= '</nav>';
 		  
@@ -109,11 +112,13 @@ class Auto {
 
 	static public function lien($nomMarque, $nomModele){
 		$resultat = '';
-		$resultat .= '<a href="modele.php?nomMarque='.$nomMarque.'&amp;nomModele='.$nomModele.'"><img class="tb"';
-		$resultat .= 'src="images/voitures/'.$nomMarque.'_'.$nomModele.'_tb.jpg" alt="'.$nomMarque.' '.$nomModele.'"';
-		$resultat .= 'title="'.$nomMarque.' '.$nomModele.'" /><span>'.$nomModele.'</span></a>';
+		$resultat .= '<a href="modele.php?nomMarque='.$nomMarque.'&amp;nomModele='.$nomModele.'">';
+		$resultat .= Auto::image($nomMarque,$nomModele,'tb');
+		$resultat .= '<span>'.$nomModele.'</span></a>';
 		return $resultat;
 	}
+
+	
 
 
 	/** Méthode "image" qui retourne le code HTML d'une image composé en fonction des paramètres
@@ -134,9 +139,9 @@ class Auto {
 		$resultat = '';
 		
 		if($class != "voiture"){
-			$resultat .= '<img src="images/voitures/'.$nomMarque.'_'.$nomModele.'_tb.jpg" class="'.$class.' alt="'.$nomMarque.' '.$nomModele.'" title="'.$nomMarque.' '.$nomModele.'" />';
+			$resultat .= '<img src="images/voitures/'.$nomMarque.'_'.$nomModele.'_tb.jpg" class="'.$class.' alt="'.Auto::titre($nomMarque,$nomModele).'" title="'.$nomMarque.' '.$nomModele.'" />';
 		}else{
-			$resultat .= '<img src="images/voitures/'.$nomMarque.'_'.$nomModele.'.jpg" class="'.$class.'" alt="'.$nomMarque.' '.$nomModele.'" title="'.Auto::titre($nomMarque,$nomModele).'" />';
+			$resultat .= '<img src="images/voitures/'.$nomMarque.'_'.$nomModele.'.jpg" class="'.$class.'" alt="'.Auto::titre($nomMarque,$nomModele).'" title="'.Auto::titre($nomMarque,$nomModele).'" />';
 
 		}
 		return $resultat;
@@ -223,10 +228,17 @@ class Auto {
 	 */
 
 	static public function ligne_puissance($voiture){
-			
-			$resultat = auto::ligne('puissance', $voiture);
+			$resultat = '';
+			$tableauPuissance = explode(':',$voiture); //120:6000
+			$string = $tableauPuissance[0].' ch @ '.$tableauPuissance[1].' tr/min';
+			$resultat = auto::ligne('Puissance', $string); //Array ( [0] => 120 [1] => 6000 ) puissance : 1
 			return $resultat;
 	}
+
+	// <tr>
+	// <td class="etiquette">Puissance : </td>
+	// <td>460 ch @ 7750 tr/min</td>
+	// </tr>
 
 
 	/** Méthode "ligne_couple" qui retourne la ligne du couple de la voiture (3e ligne)
@@ -237,15 +249,18 @@ class Auto {
 	 */
 
 	static public function ligne_couple($voiture){
-			auto::ligne($voiture);
-			$resultat = '';
-			$resultat .= '<tr>';
-			$resultat .= '<td class="etiquette">'.$voiture.' : </td>';
-			$resultat .= '<td>358 lb-pi @ 5000 tr/min</td>';
-			$resultat .= '</tr>';
-			return $resultat;
-	}
 
+			$tableauCouple = explode(':',$voiture); //112:4250
+			$string = $tableauCouple[0].' lb-pi @ '.$tableauCouple[1].' tr/min';
+			$resultat = auto::ligne('Couple', $string); //Array ( [0] => 120 [1] => 6000 ) couple : 1
+			return $resultat; 
+		}
+		
+		// $resultat = '';
+		// $resultat .= '<tr>';
+		// $resultat .= '<td class="etiquette">'.$voiture.' : </td>';
+		// $resultat .= '<td>358 lb-pi @ 5000 tr/min</td>';
+		// $resultat .= '</tr>';
 
 	/** Méthode "ligne_transmissions" qui retourne la ligne des transmissions disponibles (voir maquette, page modele.php)
 	 * Note : Cette méthode utilise la méthode "ligne"
@@ -254,20 +269,15 @@ class Auto {
 	 */
 
 	 static public function ligne_transmissions($voiture){
-		 	auto::ligne($voiture);
-			$resultat = '';
-			$resultat .= '<tr>';
-			$resultat .= '<td class="etiquette">Transmissions : </td>';
-			$resultat .= '<td>';
-			$resultat .= '<ul class="transmissions">';
-			$resultat .= '<li>Séquentielle</li>';
-			$resultat .= '<li>Manuelle, 6 rapports</li>';
-			$resultat .= '</ul>';
-			$resultat .= '</td>';
-			$resultat .= '</tr>';
-			return $resultat;
-	 }
-			
+		
+			$resultatTransmissions= $voiture; 
+			$string = '<ul class="transmissions">';
+			$string .= '<li>'.$resultatTransmissions[0].'</li>';
+			$string .= '<li>'.$resultatTransmissions[1].'</li>';
+			$string .= '</ul>';
+			$resultat = auto::ligne('Transmissions', $string); 
+			return $resultat; 
+	 }		
 
 
 	/** Méthode "ligne_consommation" qui retourne la ligne de la consommation (en ville et sur autoroute) de la voiture (voir maquette, page modele.php)
@@ -277,22 +287,17 @@ class Auto {
 	 */
 
 	static public function ligne_consommation($voiture){
-			auto::ligne($voiture);
-			$resultat = '';
-			$resultat .= '<tr>';
-			$resultat .= '<td class="etiquette">Consommation : </td>';
-			$resultat .= '<td>';
-			$resultat .= '<ul class="consommation">';
-			$resultat .= '<li>Ville : 16.9 litres/100 km</li>';
-			$resultat .= '<li>Autoroute : 10.6 litres/100 km</li>';
-			$resultat .= '</ul>';
-			$resultat .= '</td>';
-			$resultat .= '</tr>';
-			return $resultat;
+
+			$resultatConsommation= $voiture; 
+			$string = '<ul class="consommation">';
+			$string .= '<li>Ville : '.$resultatConsommation['ville'].' litres/100 km</li>';
+			$string .= '<li>Autoroute : '.$resultatConsommation['autoroute'].' litres/100 km</li>';
+			$string .= '</ul>';
+			$resultat = auto::ligne('Consommation', $string); 
+			return $resultat; 
 	}
 
 			
-
 	/** Méthode "affichageVoiture" qui retourne le div "voiture" contenant la description d'une voiture
 	 * en fonction des paramètres (voir maquette, page modele.php)
 	 * Note : Cette méthode utilise des méthodes créées précédemment
@@ -302,46 +307,49 @@ class Auto {
 	 * @param string - Le HTML du div "voiture"
 	 */
 
-	 //
-
 	static public function affichageVoiture($voiture, $nomMarque, $nomModele){
 		$resultat = '';
-		$resultat .= '<div class="voiture"><img class="voiture" src="images/voitures/ferrari_california.jpg"';
+		$resultat .= '<div class="voiture"><img class="voiture" src="images/voitures/'.$nomMarque.'_'.$nomModele.'.jpg"';
 		$resultat .= 'alt="Ferrari California" title="Ferrari California" />';
 		$resultat .= '<h2>Prix de base</h2>';
-		$resultat .= '<div class="prix">192000 $</div>';
+		$resultat .= '<div class="prix">'.$voiture[$nomMarque][$nomModele]['prix'].' $</div>';
 		$resultat .= '<h2>Caractéristiques</h2>';
 		$resultat .= '<table class="caracteristiques">';
-		$resultat .= '<tr>';
-		$resultat .= '<td class="etiquette">Moteur : </td>';
-		$resultat .= '<td>V8 4,3 litres</td>';
-		$resultat .= '</tr>';
-		$resultat .= '<tr>';
-		$resultat .= '<td class="etiquette">Puissance : </td>';
-		$resultat .= '<td>460 ch @ 7750 tr/min</td>';
-		$resultat .= '</tr>';
-		$resultat .= '<tr>';
-		$resultat .= '<td class="etiquette">Couple : </td>';
-		$resultat .= '<td>358 lb-pi @ 5000 tr/min</td>';
-		$resultat .= '</tr>';
-		$resultat .= '<tr>';
-		$resultat .= '<td class="etiquette">Transmissions : </td>';
-		$resultat .= '<td>';
-		$resultat .= '<ul class="transmissions">';
-		$resultat .= '<li>Séquentielle</li>';
-		$resultat .= '<li>Manuelle, 6 rapports</li>';
-		$resultat .= '</ul>';
-		$resultat .= '</td>';
-		$resultat .= '</tr>';
-		$resultat .= '<tr>';
-		$resultat .= '<td class="etiquette">Consommation : </td>';
-		$resultat .= '<td>';
-		$resultat .= '<ul class="consommation">';
-		$resultat .= '<li>Ville : 16.9 litres/100 km</li>';
-		$resultat .= '<li>Autoroute : 10.6 litres/100 km</li>';
-		$resultat .= '</ul>';
-		$resultat .= '</td>';
-		$resultat .= '</tr>';
+		// $resultat .= '<tr>';
+		// $resultat .= '<td class="etiquette">Moteur : </td>';
+		// $resultat .= '<td>V8 4,3 litres</td>';
+		// $resultat .= '</tr>';
+		$resultat .= Auto::ligne('Moteur', $voiture[$nomMarque][$nomModele]['moteur']);
+		$resultat .= Auto::ligne_puissance($voiture[$nomMarque][$nomModele]['puissance']);
+		$resultat .= Auto::ligne_couple($voiture[$nomMarque][$nomModele]['couple']);
+		$resultat .= Auto::ligne_transmissions($voiture[$nomMarque][$nomModele]['transmissions']);
+		$resultat .= Auto::ligne_consommation($voiture[$nomMarque][$nomModele]['consommation']);
+		// $resultat .= '<tr>';
+		// $resultat .= '<td class="etiquette">'.Auto::ligne('puissance', $voiture).'</td>';
+		// $resultat .= '<td>460 ch @ 7750 tr/min</td>';
+		// $resultat .= '</tr>';
+		// $resultat .= '<tr>';
+		// $resultat .= '<td class="etiquette">Couple : </td>';
+		// $resultat .= '<td>358 lb-pi @ 5000 tr/min</td>';
+		// $resultat .= '</tr>';
+		// $resultat .= '<tr>';
+		// $resultat .= '<td class="etiquette">Transmissions : </td>';
+		// $resultat .= '<td>';
+		// $resultat .= '<ul class="transmissions">';
+		// $resultat .= '<li>Séquentielle</li>';
+		// $resultat .= '<li>Manuelle, 6 rapports</li>';
+		// $resultat .= '</ul>';
+		// $resultat .= '</td>';
+		// $resultat .= '</tr>';
+		// $resultat .= '<tr>';
+		// $resultat .= '<td class="etiquette">Consommation : </td>';
+		// $resultat .= '<td>';
+		// $resultat .= '<ul class="consommation">';
+		// $resultat .= '<li>Ville : 16.9 litres/100 km</li>';
+		// $resultat .= '<li>Autoroute : 10.6 litres/100 km</li>';
+		// $resultat .= '</ul>';
+		// $resultat .= '</td>';
+		// $resultat .= '</tr>';
 		$resultat .= '</table>';
 		$resultat .= '</div>';
 

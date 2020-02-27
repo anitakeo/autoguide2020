@@ -36,5 +36,14 @@ include_once("../src/donnees.inc.php");
 // var_dump(Auto::listeModeles(''));
 // var_dump(Auto::ligne("allo","chat"));
 // var_dump(Auto::ligne_puissance("allo"));
-echo Auto::ligne_puissance("");
+echo Auto::ligne_puissance($voitures['Ford']['Fiesta']['puissance']);
+echo Auto::ligne_couple($voitures['Ford']['Fiesta']['couple']);
+echo Auto::ligne_transmissions($voitures['Ferrari']['California']['transmissions']);
+echo Auto::ligne_consommation($voitures['Ferrari']['California']['consommation']);
+// echo Auto::ligne_couple("");
+// echo Auto::ariane('Ford', 'Fiesta');
+// echo Auto::lien('Ford', 'Fiesta');
+// echo Auto::image('Ford', 'Fiesta');
 ?>
+<!-- tableau =  array('nomCle' => array('uneCle' => array('nomCle' => etcetc)));
+$voitures       valeur   cle       valeur cle        valeur cle         valeur... -->
