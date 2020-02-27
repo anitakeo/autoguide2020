@@ -26,12 +26,15 @@ include_once("../src/donnees.inc.php");
 // var_dump(Auto::lien('Ford', 'Fiesta'));
 // var_dump(Auto::image('Ferrari', 'California','patate'));
 // var_dump(Auto::image('Ferrari', 'California','voiture'));
-var_dump(Auto::listeMarques($voitures));
-// var_dump(Auto::listeModeles('Ford', ''));
+// var_dump(Auto::listeMarques($voitures));
+// var_dump(Auto::listeModeles('Ford', $voitures['Ford']));
+// echo Auto::listeModeles('Ford', $voitures['Ford']);
+// echo Auto::listeMarques($voitures);
 // var_dump(Auto::image('ferrari', 'california','voiture'));
 // var_dump(Auto::listeModeles('ford','fiesta'));
 // var_dump(Auto::listeMarques('Ford'));
 // var_dump(Auto::listeModeles(''));
 // var_dump(Auto::ligne("allo","chat"));
-// var_dump(Auto::ligne_puissance("allo","chat"));
+// var_dump(Auto::ligne_puissance("allo"));
+echo Auto::ligne_puissance("");
 ?>

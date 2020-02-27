@@ -159,7 +159,7 @@ class Auto {
 			// $nomMarque est une clée ('Ford'=>array) et array est une valeur, comme $autoMarque.
         	foreach($autos as $nomMarque => $autoMarque){
             $resultat .= '<li><a href="marque.php?nomMarque='.$nomMarque.'">'.$nomMarque.'</a>';
-            // $resultat .= self::listeModeles($nomMarque,$autoMarque);
+            $resultat .= self::listeModeles($nomMarque,$autoMarque);
             $resultat .= '</li>';
         }
         	$resultat .= '</ul>';
@@ -179,23 +179,16 @@ class Auto {
 	// Ça ne marche pas.
 
 	static public function listeModeles($nomMarque, $autosMarque){
+			
+		$resultat = '';
+		$resultat .= '<ul class="listeModeles">';
 	
-			$resultat .= auto::listeMarques();
-	
-			foreach($autosMarque as $nomMarque -> $nomModele){
-				$resultat = '';
-				$resultat .= '<ul class="listeModeles">';
-				$resultat .= '<li><a href="modele.php?nomMarque=Ford&amp;nomModele='.$nomModele.'"><img class="tb"';
-				$resultat .= 'src="images/voitures/ford_'.$nomModele.'_tb.jpg" alt="Ford '.$nomModele.'"';
+			foreach($autosMarque as $nomModele => $modele){
+				$resultat .= '<li><a href="modele.php?nomMarque='.$nomMarque.'&amp;nomModele='.$nomModele.'"><img class="tb"';
+				$resultat .= 'src="images/voitures/'.$nomMarque.'_'.$nomModele.'_tb.jpg" alt="'.$nomMarque.' '.$nomModele.'"';
 				$resultat .= 'title="'.$nomMarque.' '.$nomModele.'" /><span>'.$nomModele.'</span></a></li>';
-				$resultat .= '<li><a href="modele.php?nomMarque=Ford&amp;nomModele=Focus"><img class="tb"';
-				$resultat .= 'src="images/voitures/ford_focus_tb.jpg" alt="Ford Focus"';
-				$resultat .= 'title="'.$nomMarque.' Focus" /><span>Focus</span></a></li>';
-				$resultat .= '<li><a href="modele.php?nomMarque=Ford&amp;nomModele=Fusion"><img class="tb"';
-				$resultat .= 'src="images/voitures/ford_fusion_tb.jpg" alt="Ford Fusion"';
-				$resultat .= 'title="'.$nomMarque.' Fusion" /><span>Fusion</span></a></li>';
-				$resultat .= '</ul>';
 			}
+			$resultat .= '</ul>';
 			
 			return $resultat;
 
@@ -218,7 +211,6 @@ class Auto {
 			$resultat .= '<td class="etiquette">'.$etiquette.' : </td>';
 			$resultat .= '<td>'.$contenu.'</td>';
 			$resultat .= '</tr>';
-
 			return $resultat;
 	}
 
@@ -231,12 +223,8 @@ class Auto {
 	 */
 
 	static public function ligne_puissance($voiture){
-			// auto::ligne();
-			$resultat = '';
-			$resultat .= '<tr>';
-			$resultat .= '<td class="etiquette"> '.$voiture[1].': </td>';
-			$resultat .= '<td></td>';
-			$resultat .= '</tr>';
+			
+			$resultat = auto::ligne('puissance', $voiture);
 			return $resultat;
 	}
 
